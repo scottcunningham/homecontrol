@@ -1,0 +1,88 @@
+<html>
+<head>
+    <style>
+        body {
+            width: 24em;
+            font-family: Inconsolata, Monospace;
+            background-color: #333333;
+            color: #cccccc;
+        }
+
+        #all-controls
+        {
+            position:absolute; left: 5%; right: 5%; bottom: 5%; top: 5%;
+        }
+
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        #controls {
+        margin-left:auto;
+        margin-right:auto;
+        }
+
+
+        #controls.button {
+        left:50%;
+        margin-left:-100px;
+        width:200px;
+        }
+    </style>
+
+    <title>pibox::asdf</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ url_for('static', filename='ui.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<head>
+
+<body>
+
+<div id="all-controls">
+
+    <ul>
+        <li><a href="#vol-controls">vol</a></li>
+        <li><a href="#fan-controls">fan</a></li>
+        <li><a href="#cam-controls">cam</a></li>
+    </ul>
+
+    <div id="vol-controls">
+        <h2>M E D I A</h2>
+        <button id="b1" class="fa fa-volume-up">
+        <button id="b2" class="fa fa-volume-down">
+        <button id="b3" class="fa fa-refresh">
+    </div>
+
+    <div id="fan-controls">
+        <h2>F A N S</h2>
+        <div id="fan-living-room">
+            <p>Living room</p>
+            <button id="b1" class="fa fa-volume-up">
+        </div>
+        <div id="fan-bedroom">
+            <p>Bedroom</p>
+            <button id="b1" class="fa fa-volume-up">
+        </div>
+    </div>
+
+    <div id="cam-controls">
+        <h2>C A M E R A</h2>
+        <div id="cam-hall">
+            <p>Toggle</p>
+            <button id="b1" class="fa fa-camera"/>
+        </div>
+    </div>
+
+</div>
+
+</body>
