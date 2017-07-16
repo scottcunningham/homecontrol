@@ -2,6 +2,7 @@
 
 from flask import Blueprint, request
 from flask import render_template
+import ConfigParser
 import requests
 import subprocess
 import json
@@ -17,6 +18,7 @@ MUTE_CMD = 'amixer -c 1 sset PCM toggle'
 REFRESH_PLAYLIST_CMD = 'sudo service mopidy restart'
 
 MOPIDY_HOST = 'http://localhost/mopidy/rpc'
+MOPIDY_CONFIG_FILE = '/etc/mopidy/mopidy.conf'
 
 vol_blueprint = Blueprint('vol', __name__)
 
@@ -60,8 +62,12 @@ def main():
 
 @vol_blueprint.route('/refresh')
 def refresh():
-    run_cmd(REFRESH_PLAYLIST_CMD)
+    restart_mopidy()
     return 'refreshing playlists (restarting mopidy lol)'
+
+
+def restart_mopidy():
+    run_cmd(REFRESH_PLAYLIST_CMD)
 
 
 @vol_blueprint.route('/fantoggle')
@@ -92,6 +98,18 @@ def prev_track():
     return 'prev'
 
 
+@vol_blueprint.route('/setuser/<user>')
+def switch_user(user):
+    set_spotify_user(user)
+    restart_mopidy()
+    return "switched to user {}".format(user)
+
+
+@vol_blueprint.route('/getuser/')
+def get_user():
+    return current_spotify_user()
+
+
 def run_mopidy_cmd(method):
     data = {"jsonrpc": "2.0", "id": 1, "method": method}
     resp = requests.post(MOPIDY_HOST, data=json.dumps(data))
@@ -109,3 +127,29 @@ def run_cmd(cmd, shell=False):
 def get_vol():
     stdout = subprocess.Popen(GET_CMD, stdout=PIPE).communicate()[0]
     return stdout
+
+
+def current_spotify_user():
+    with open(MOPIDY_CONFIG_FILE) as cf:
+        config = ConfigParser.ConfigParser()
+        config.readfp(cf)
+        return config.get('spotify', 'username')
+
+
+def get_user_spotify_config(user):
+        with open(MOPIDY_CONFIG_FILE) as cf:
+            config = ConfigParser.ConfigParser()
+            config.readfp(cf)
+        section = 'spotify_{}'.format(user)
+        return {x: config.get(section, x) for x in
+                ['username', 'password', 'client_id', 'client_secret']}
+
+
+def set_spotify_user(new_user):
+    new_config = get_user_spotify_config(new_user)
+    with open(MOPIDY_CONFIG_FILE, 'rw+') as cf:
+        config = ConfigParser.ConfigParser()
+        config.readfp(cf)
+        for field in ['username', 'password', 'client_id', 'client_secret']:
+            config.set('spotify', field, new_config[field])
+            config.write(cf)

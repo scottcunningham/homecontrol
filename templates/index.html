@@ -1,3 +1,5 @@
+<html>
+<head>
 <title>pibox::vol</title>
 <style>
     body {
@@ -21,38 +23,92 @@
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .magic-selector {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 100px;
+        padding-right: 60px;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     #controls {
-        margin-left:auto;
-        margin-right:auto;
-        width: 100%;
+        position: absolute;
         height: 10%
     }
 </style>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='external/font-awesome.min.css') }}">
-
-<script src="{{ url_for('static', filename='external/jquery-3.2.1.min.js') }}"/>
-
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
-console.log('asd');
+$(document).ready(function(){
+    $('.scbt').click(function() {
+        $path = $(this).attr('scbta')
+        $.get($path, function(data, st){
+            console.log(data+'\n'+st)
+        });
+    });
 
-setTimeout(function() { alert('asdf') }, 300);
+    $.get('/vol/getuser', function(data, st) {
+        console.log("Setting select bot to user " + data);
+        $('#account-select').val(data)
+    });
+
+    $('#account-select').change(function() {
+        $sel_user = $(this).find(":selected").attr('value');
+        $.get('/vol/getuser', function(data, st) {
+            $current_user = data;
+            console.log('current ' + $current_user + ' sel ' + $sel_user);
+            if ($current_user !== $sel_user) {
+                console.log("switching to " + $sel_user);
+                $.get('/vol/setuser/' + $sel_user, function(data, st) {
+                    console.log(data+'\n'+st);
+                    alert("Changing user, will reload in 10s");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 10000);
+                });
+            } else {
+                console.log("User " + $sel_user + " is already selected");
+            }
+        });
+    })
+});
 </script>
+</head>
+
+<body>
 
 <div id="controls">
-	<button class="fa fa-play" onclick="$.get('/vol/playpause',function(data,st){console.log(data+'\n'+st)})"></button>
-	<button class="fa fa-step-backward" onclick="$.get('/vol/track/prev',function(data,st){console.log(data+'\n'+st)})"></button>
-	<button class="fa fa-step-forward" onclick="$.get('/vol/track/next',function(data,st){console.log(data+'\n'+st)})"></button>
-    <button class="fa fa-volume-up" onclick="$.get('/vol/up',function(data,st){console.log(data+'\n'+st)})"></button>
-	<button class="fa fa-volume-down" onclick="$.get('/vol/down',function(data,st){console.log(data+'\n'+st)})"></button>
-	<button class="fa fa-volume-off" onclick="$.get('/vol/mute',function(data,st){console.log(data+'\n'+st)})"></button>
-	<button class="fa fa-refresh" onclick="$.get('/vol/refresh',function(data,st){console.log(data+'\n'+st)})"></button>
+    <button class="scbt fa fa-play"          scbta='/vol/playpause'></button>
+    <button class="scbt fa fa-step-backward" scbta='/vol/track/prev'></button>
+    <button class="scbt fa fa-step-forward"  scbta='/vol/track/next'></button>
+    <button class="scbt fa fa-volume-up"     scbta='/vol/up'></button>
+    <button class="scbt fa fa-volume-down"   scbta='/vol/down'></button>
+    <button class="scbt fa fa-volume-off"    scbta='/vol/mute'></button>
+    <button class="scbt fa fa-refresh"       scbta='/vol/refresh'></button>
+    <select id="account-select">
+        <option value="blurpl">scott</option>
+        <option value="imorlowska">iza</option>
+    </select>
 </div>
 
 
 
 <div id="frame">
-	<iframe width="100%" height="100%" frameborder="0" src="http://192.168.1.165/moped"/>
+    <iframe width="100%" height="100%" frameborder="0" src="http://192.168.1.165/moped"/>
 </div>
+
+<body>
+</html>
