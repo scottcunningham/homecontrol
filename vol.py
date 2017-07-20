@@ -57,7 +57,7 @@ def mute():
 
 @vol_blueprint.route('/')
 def main():
-    return render_template('index.html')
+    return render_template('vol.html')
 
 
 @vol_blueprint.route('/refresh')
