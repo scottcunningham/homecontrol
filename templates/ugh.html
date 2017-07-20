@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>pibox</title>
+<style>
+    body {
+        width: 24em;
+        margin: 0 auto;
+        font-family: Inconsolata, Monospace;
+	background-color: #333333;
+	color: #cccccc;
+    }
+
+    a {
+        color: #6688aa;
+    }
+
+    h1 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 12em;
+    }
+
+    .piimg {
+	width: 12%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+    }
+
+</style>
+</head>
+<body>
+
+<h1>welcome to <a href="">pi3.local</a></h1>
+
+<img class="piimg" src="{{ url_for('static', filename='pi.svg' ) }}"></img>
+
+<h2>links:</h2>
+<ul>
+	<li><a href="/moped">music</a></li>
+	<li><a href="/vol">volume</a></li>
+	<li><a href="/cam">camera</a></li>
+</ul>
+
+
+<h2>downloads:</h2>
+<ul>
+	<li><a href="/pivol.apk">pivol.apk</a></li>
+</body>
+</html>

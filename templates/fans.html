@@ -1,0 +1,97 @@
+<html>
+<head>
+    <style>
+        body {
+            width: 24em;
+            font-family: Inconsolata, Monospace;
+            background-color: #333333;
+            color: #cccccc;
+        }
+
+        #all-controls
+        {
+            position:absolute; left: 5%; right: 5%; bottom: 5%; top: 5%;
+        }
+
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        #controls {
+        margin-left:auto;
+        margin-right:auto;
+        }
+
+        #controls.button {
+        left:50%;
+        margin-left:-100px;
+        width:200px;
+        }
+
+        .sc-but-selected {
+            background-color: #4CAF50;
+        }
+
+        .sc-but-unselected {
+            background-color: #ff6666;
+        }
+    </style>
+
+    <title>pibox::asdf</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+    $(document).ready(function() {
+        function setFanStatus() {
+            $.get('/fan/status', function(data, st) {
+                var status = JSON.parse(data).living_room;
+                console.log(status);
+                obj = $('#fan-living-room')
+                if (status) {
+                    obj.removeClass();
+                    obj.addClass('sc-but-selected');
+                    obj.addClass('fa fa-check');
+                } else {
+                    obj.removeClass();
+                    obj.addClass('sc-but-unselected');
+                    obj.addClass('fa fa-times');
+                }
+            });
+        }
+
+        setFanStatus();
+
+        $('#fan-living-room').click(function() {
+            $.get('/fan/toggle', function(data, st) {
+                console.log(data);
+                setFanStatus();
+            });
+        });
+    });
+    </script>
+<head>
+
+<body>
+
+<div id="all-controls">
+
+    <div id="fan-controls">
+        <h2>F A N S</h2>
+        <div id="fan-living-room-d">
+            <p>Living room</p>
+            <button id="fan-living-room">
+        </div>
+    </div>
+</div>
+
+</body>
