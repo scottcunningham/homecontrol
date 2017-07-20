@@ -14,7 +14,7 @@ ssh -t pi3 sudo cp /tmp/vol-initd /etc/init.d/volcontrol
 ssh -t pi3 sudo systemctl daemon-reload
 scp -r $nginxvhost pi3:/tmp/vol-vhost
 ssh -t pi3 sudo cp /tmp/vol-vhost /etc/nginx/sites-enabled/default
-ssh -t pi3 sudo serive nginx reload
+ssh -t pi3 sudo service nginx reload
 echo 'Restarting service..'
 ssh -t pi3 sudo service volcontrol restart
 echo 'Checking service health..'

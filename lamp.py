@@ -3,7 +3,6 @@
 import json
 from flask import Blueprint
 from pyHS100 import SmartPlug
-from flask import render_template
 
 lamp_blueprint = Blueprint('lamp', __name__)
 
@@ -23,9 +22,4 @@ def lamptoggle():
 @lamp_blueprint.route('/status')
 def lamp_status():
     p = SmartPlug('192.168.1.190')
-    return json.dumps({'lamps': p.is_on})
-
-
-@lamp_blueprint.route('/')
-def view():
-    return render_template('lamps.html')
+    return json.dumps({'status': p.is_on})

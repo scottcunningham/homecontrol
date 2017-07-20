@@ -3,7 +3,6 @@
 import json
 from flask import Blueprint
 from pyHS100 import SmartPlug
-from flask import render_template
 
 fan_blueprint = Blueprint('fan', __name__)
 
@@ -23,9 +22,4 @@ def fantoggle():
 @fan_blueprint.route('/status')
 def fan_status():
     p = SmartPlug('192.168.1.188')
-    return json.dumps({'fan': p.is_on})
-
-
-@fan_blueprint.route('/')
-def view():
-    return render_template('fans.html')
+    return json.dumps({'status': p.is_on})
