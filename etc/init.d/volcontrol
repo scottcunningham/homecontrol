@@ -10,7 +10,7 @@
 ### END INIT INFO
 
 dir="/home/pi/vol"
-cmd="/usr/bin/python /home/pi/vol/app.py"
+cmd="/usr/bin/python3 /home/pi/vol/app.py"
 user="pi"
 
 name=`basename $0`

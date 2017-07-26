@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from flask import Blueprint, request
 from flask import render_template
-import ConfigParser
+import configparser
 import requests
 import subprocess
 import json
@@ -45,7 +45,7 @@ def set():
 @vol_blueprint.route('/get')
 def get():
     vol = get_vol()
-    print 'vol is', vol
+    print('vol is', vol)
     return vol
 
 
@@ -116,11 +116,10 @@ def run_mopidy_cmd(method):
     if resp.status_code/100 != 2:
         raise Exception('Mopidy API call {} failed with status {}, error {}'
                         .format(method, resp.status_code, resp.content))
-    return json.loads(resp.content)
+    return json.loads(resp.content.decode('utf-8'))
 
 
 def run_cmd(cmd, shell=False):
-    print cmd
     return subprocess.check_call(cmd.split(), shell=shell)
 
 
@@ -131,14 +130,14 @@ def get_vol():
 
 def current_spotify_user():
     with open(MOPIDY_CONFIG_FILE) as cf:
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.readfp(cf)
         return config.get('spotify', 'username')
 
 
 def get_user_spotify_config(user):
         with open(MOPIDY_CONFIG_FILE) as cf:
-            config = ConfigParser.ConfigParser()
+            config = configparser.ConfigParser()
             config.readfp(cf)
         section = 'spotify_{}'.format(user)
         return {x: config.get(section, x) for x in
@@ -147,9 +146,11 @@ def get_user_spotify_config(user):
 
 def set_spotify_user(new_user):
     new_config = get_user_spotify_config(new_user)
-    with open(MOPIDY_CONFIG_FILE, 'rw+') as cf:
-        config = ConfigParser.ConfigParser()
+    with open(MOPIDY_CONFIG_FILE, 'r') as cf:
+        config = configparser.ConfigParser()
         config.readfp(cf)
         for field in ['username', 'password', 'client_id', 'client_secret']:
             config.set('spotify', field, new_config[field])
-            config.write(cf)
+
+    with open(MOPIDY_CONFIG_FILE, 'w') as cf:
+        config.write(cf)
