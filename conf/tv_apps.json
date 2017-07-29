@@ -1,0 +1,147 @@
+{
+    "accessibility":{
+        "icon":"http://192.168.1.162:3000/resources/45213edbab76a88fd3715259e99e39206d70080b/icon_accessibility.png",
+        "name":"Accessibility",
+        "uri":"com.webos.app.accessibility"
+    },
+    "all4":{
+        "icon":"http://192.168.1.162:3000/resources/558f7c89d3312001005e2a085b6501857278b935/largeIcon.png",
+        "name":"All4",
+        "uri":"com.fvp.ch4"
+    },
+    "amazon-prime-video":{
+        "icon":"http://192.168.1.162:3000/resources/c1626a7861bbd9f00ff168ac4881d926b2f0ec75/aiv_white_130x130.png",
+        "name":"lovefilm",
+        "uri":"lovefilm"
+    },
+    "bbc-iplayer":{
+        "icon":"http://192.168.1.162:3000/resources/d3e83361f202bb9b690a4ec23f9a2191cd3d0b39/bbc_130x130.png",
+        "name":"BBC iPlayer",
+        "uri":"bbc.iplayer.3.0"
+    },
+    "device-connector":{
+        "icon":"http://192.168.1.162:3000/resources/228027fef9b4334fb7731f55e2d5e15cf5ea5f47/icon.png",
+        "name":"Connection Wizard",
+        "uri":"com.webos.app.connectionwizard"
+    },
+    "euronews":{
+        "icon":"http://192.168.1.162:3000/resources/b46bf109847c1c1062d7c55bf87072e6dfb83dc8/euronews_130x130.png",
+        "name":"EuroNews",
+        "uri":"euronews"
+    },
+    "google-play-movies":{
+        "icon":"http://192.168.1.162:3000/resources/e5d44ce36ead70663438e687b0fabadb31e62c32/10619178783035667_16907034_130x130_webos.png",
+        "name":"Google Play Movies & TV",
+        "uri":"googleplaymovieswebos"
+    },
+    "itv-hub":{
+        "icon":"http://192.168.1.162:3000/resources/bda948d3c50097824a3e3bf1fff7e6d5a47980ef/largeIcon.png",
+        "name":"ITV Hub",
+        "uri":"com.fvp.itv"
+    },
+    "lg-content-store":{
+        "icon":"http://192.168.1.162:3000/resources/982e098aa13a3c9766446a6d45cd08de61ee3f11/lgstore_130x130.png",
+        "name":"LG Store",
+        "uri":"com.webos.app.discovery"
+    },
+    "livetv":{
+        "icon":"http://192.168.1.162:3000/resources/99520924ec9246b4cd423ef4a94250ff9ec051c0/icon_antenna.png",
+        "name":"Live TV",
+        "uri":"com.webos.app.livetv"
+    },
+    "multi-view":{
+        "icon":"http://192.168.1.162:3000/resources/0a33d2943c7ea92b43bbf42aea4b149de5902841/icon.png",
+        "name":"Multi View",
+        "uri":"com.webos.app.multiview"
+    },
+    "music":{
+        "icon":"http://192.168.1.162:3000/resources/c91b9de0bfe085d5cc040a033ad6df5f00d5b640/icon.png",
+        "name":"Music",
+        "uri":"com.webos.app.music"
+    },
+    "netflix":{
+        "icon":"http://192.168.1.162:3000/resources/56e9c3eb908ec76808e4eeec5fe827745956f6c7/LARGE_APP_ICON.png",
+        "name":"Netflix",
+        "uri":"netflix"
+    },
+    "notifications":{
+        "icon":"http://192.168.1.162:3000/resources/c8d477bcec865d579134d8d2e8327ca3276dfe68/icon_notification.png",
+        "name":"Notifications",
+        "uri":"com.webos.app.notificationcenter"
+    },
+    "now-tv":{
+        "icon":"http://192.168.1.162:3000/resources/9bea13857bbf80f18104a84661d7c301e798ed70/4447057803426046_4_130x130_webos.png",
+        "name":"Now TV",
+        "uri":"now.tv"
+    },
+    "photo-&-video":{
+        "icon":"http://192.168.1.162:3000/resources/0d7949ab7bb66cde4e243b4109952c86b0800a96/icon.png",
+        "name":"Photos & Videos",
+        "uri":"com.webos.app.photovideo"
+    },
+    "plex":{
+        "icon":"http://192.168.1.162:3000/resources/77df6bbf72612c708ac6de48f09d264a2dcc5ebe/Plex_130x130.png",
+        "name":"Plex",
+        "uri":"cdp-30"
+    },
+    "recordings":{
+        "icon":"http://192.168.1.162:3000/resources/8feb61ddfd969d02d2cf0aa1634a50053857c10a/icon.png",
+        "name":"Recordings",
+        "uri":"com.webos.app.recordings"
+    },
+    "screen-share":{
+        "icon":"http://192.168.1.162:3000/resources/7b6b6cc32423d233dcbba0e77898dc22d0bb4235/icon_screenshare.png",
+        "name":"Miracast",
+        "uri":"com.webos.app.miracast"
+    },
+    "search":{
+        "icon":"http://192.168.1.162:3000/resources/adda5a8c0079de326c1c977b90d44ac955b0164f/icon_universalsearch.png",
+        "name":"Voice",
+        "uri":"com.webos.app.voice"
+    },
+    "smart-iptv":{
+        "icon":"http://192.168.1.162:3000/resources/f9320a5826ce75728926e89bfbf55f03ab8f6036/9393130329173301_3_130x130_webos.png",
+        "name":"Smart IPTV",
+        "uri":"com.1827622.109556"
+    },
+    "tv-cast":{
+        "icon":"http://192.168.1.162:3000/resources/bf69e95c9ba310023414cf1e6cc57272e019a90e/Icon130x130.png",
+        "name":"TV Cast",
+        "uri":"de.2kit.castbrowserlg"
+    },
+    "tv-guide":{
+        "icon":"http://192.168.1.162:3000/resources/64e741f6e2d005a5afc84df75c0482b5d29d3a8d/icon_tvguide.png",
+        "name":"TV Guide",
+        "uri":"com.webos.app.tvguide"
+    },
+    "tv-scheduler":{
+        "icon":"http://192.168.1.162:3000/resources/976f33442631e896e0bd773adb49d4fa9cc567ac/icon_scheduler.png",
+        "name":"TV Scheduler",
+        "uri":"com.webos.app.scheduler"
+    },
+    "user-guide":{
+        "icon":"http://192.168.1.162:3000/resources/6cbbe4cefa97b7c688b70307ac1bc3f127e67704/icon_userguide.png",
+        "name":"User Guide",
+        "uri":"com.webos.app.tvuserguide"
+    },
+    "vintera-tv":{
+        "icon":"http://192.168.1.162:3000/resources/da3ef0aa87342f4e601e114d535c11cf165f8728/largeIcon.png",
+        "name":"Vintera TV",
+        "uri":"com.4160252.176886"
+    },
+    "web-browser":{
+        "icon":"",
+        "name":"Browser",
+        "uri":"com.webos.app.browser"
+    },
+    "wuaki.tv":{
+        "icon":"http://192.168.1.162:3000/resources/4784217c3c39a1d77d8cd15bb243ce0b34cc8431/3420755853448324_45681080689652461320x320-lg_130x130_webos.png",
+        "name":"Wuaki TV",
+        "uri":"ui30"
+    },
+    "youtube":{
+        "icon":"http://192.168.1.162:3000/resources/3ec743c771b0c12f4c499795bf6484544bb7266b/youtube_leanback_v4_130x130.png",
+        "name":"YouTube",
+        "uri":"youtube.leanback.v4"
+    }
+}

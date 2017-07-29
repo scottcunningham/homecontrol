@@ -2,7 +2,7 @@
 
 host=pi3
 src=$(echo $(dirname $0))/..
-srcs=$(echo $src/*.py $src/templates $src/static)
+srcs=$(echo $src/*.py $src/templates $src/static $src/conf)
 initd=etc/init.d/volcontrol
 nginxvhost=etc/nginx/sites-enabled/default
 installdir=/home/pi/vol

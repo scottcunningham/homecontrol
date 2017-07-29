@@ -1,0 +1,4 @@
+flask
+pylgtv
+pyhs100
+requests

@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>pibox::vol</title>
+<style>
+    body {
+        width: 24em;
+        font-family: Inconsolata, Monospace;
+        background-color: #333333;
+        color: #cccccc;
+    }
+
+    #frame {
+        position:absolute; left: 0; right: 0; bottom: 0; top: 10%;
+    }
+
+
+    .button-container {
+        width: 300%;
+        overflow-y: auto;
+    }
+
+    .button-container > a {
+        width: 100px;
+        height: 100px;
+        float: left;
+        background: lightgray;
+        margin: 15px;
+        background-color: #4CAF50;
+    }
+
+    .scbt {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #vol-current {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    select {
+        background-color: #4CAF50;
+        border: none;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 100px;
+        padding-right: 60px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        appearance: none;
+        border: 1px solid #111;
+        width: 80px;
+        padding: 5px 35px 5px 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        height: 34px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: url({{ url_for('static', filename='spotify.png')}}) 100% / 30% no-repeat #eee;
+    }
+
+    #controls {
+        position: absolute;
+        height: 10%;
+        width: 100%;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+$(document).ready(function(){
+    $('.scbt').click(function() {
+        $path = '/tv/open/' + $(this).attr('app');
+        console.log($path);
+        $.get($path, function(data, st){
+            console.log(data+'\n'+st)
+        });
+    });
+
+    //$('.scbt').each(function() {
+    //    $(this).css('background-image', 'url(' + $(this).attr('bgurl') + ')');
+    //});
+});
+</script>
+</head>
+
+<body>
+
+
+    <div class="button-container">
+       <h3>apps:</h3>
+       {% for app in apps %}
+       <!-- <button class="scbt" app="{{ app }}">{{ app }}</button> -->
+       <a href="#/" class="scbt button" bgurl="{{ apps[app]['icon'] }}" app="{{ app }}">{{ apps[app]['name'] }}</a>
+       {% endfor %}
+    </div>
+
+
+    <div class="button-container">
+       <h3>inputs:</h3>
+       {% for input in inputs %}
+       <!-- <button class="scbt" input="{{ input }}">{{ input }}</button> -->
+       <a href="#/" class="scbt button" bgurl="{{ inputs[input]['icon'] }}" app="{{ input }}">{{ inputs[input]['name'] }}</a>
+       {% endfor %}
+    </div>
+
+<body>
+</html>

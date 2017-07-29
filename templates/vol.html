@@ -13,7 +13,7 @@
         position:absolute; left: 0; right: 0; bottom: 0; top: 10%;
     }
 
-    button {
+    .scbt {
         background-color: #4CAF50;
         border: none;
         color: white;
@@ -28,11 +28,24 @@
         padding-bottom: 20px;
     }
 
-    .magic-selector {
-        background-color: #4CAF50;
+    #vol-current {
         border: none;
         color: white;
         padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    select {
+        background-color: #4CAF50;
+        border: none;
+        color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -41,22 +54,46 @@
         padding-right: 60px;
         padding-top: 20px;
         padding-bottom: 20px;
+
+        appearance: none;
+        border: 1px solid #111;
+        width: 80px;
+        padding: 5px 35px 5px 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        height: 34px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: url({{ url_for('static', filename='spotify.png')}}) 100% / 30% no-repeat #eee;
     }
 
     #controls {
         position: absolute;
-        height: 10%
+        height: 10%;
+        width: 100%;
     }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 $(document).ready(function(){
+    function updateVol() {
+        $.get("/vol/get", function(data, st) {
+            console.log("Volume is " + data);
+            $("#vol-current").html(data);
+        });
+    }
+
+    updateVol();
+
     $('.scbt').click(function() {
         $path = $(this).attr('scbta')
         $.get($path, function(data, st){
             console.log(data+'\n'+st)
         });
+
+        updateVol();
     });
 
     $.get('/vol/getuser', function(data, st) {
@@ -101,10 +138,12 @@ $(document).ready(function(){
         <option value="blurpl">scott</option>
         <option value="imorlowska">iza</option>
     </select>
+    <p id="vol-current"></p>
 </div>
 
+<!-- <meta name=viewport content="width=device-width, initial-scale=1"> -->
 <div id="frame">
-    <iframe width="100%" height="100%" frameborder="0" src="http://192.168.1.165/moped"/>
+    <iframe width="100%" height="100%" frameborder="0" src="http://192.168.1.165/iris"/>
 </div>
 
 <body>

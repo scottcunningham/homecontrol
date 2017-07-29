@@ -13,7 +13,7 @@ SET_CMD = "amixer -q -c 1 sset PCM {}%"
 UP_CMD = CMD.format('+')
 DOWN_CMD = CMD.format('-')
 GET_CMD = ["sh", "-c",
-           "amixer -c 1 get PCM | awk '/Front Left:/ { print $5 }'"]
+           "amixer -c 1 get PCM | awk '/Front Left:/ { print $5 \"|\" $7 }'"]
 MUTE_CMD = 'amixer -c 1 sset PCM toggle'
 REFRESH_PLAYLIST_CMD = 'sudo service mopidy restart'
 
@@ -44,9 +44,11 @@ def set():
 
 @vol_blueprint.route('/get')
 def get():
-    vol = get_vol()
-    print('vol is', vol)
-    return vol
+    vol, muted = get_vol()
+    print('vol is', vol, ' muted:', muted)
+    if muted:
+        return "{}% [muted]".format(vol)
+    return "{}%".format(vol)
 
 
 @vol_blueprint.route('/mute')
@@ -125,7 +127,10 @@ def run_cmd(cmd, shell=False):
 
 def get_vol():
     stdout = subprocess.Popen(GET_CMD, stdout=PIPE).communicate()[0]
-    return stdout
+    vol, muted = stdout.decode('utf-8').replace('[', '').replace(']', '').replace('%', '').split('|')
+    muted = "off" in muted
+    print(stdout, "==>", vol, muted)
+    return vol, muted
 
 
 def current_spotify_user():
@@ -141,7 +146,7 @@ def get_user_spotify_config(user):
             config.readfp(cf)
         section = 'spotify_{}'.format(user)
         return {x: config.get(section, x) for x in
-                ['username', 'password', 'client_id', 'client_secret']}
+            ['username', 'password', 'client_id', 'client_secret']}
 
 
 def set_spotify_user(new_user):

@@ -1,0 +1,27 @@
+{
+    "av":{
+        "icon":"http://192.168.1.162:3000/resources/1f34ecf7d292806a0af0a421ff0d99460eae3110/av.png",
+        "name":"AV1",
+        "uri":"com.webos.app.externalinput.av1"
+    },
+    "component":{
+        "icon":"http://192.168.1.162:3000/resources/00e2dfbc597d62f0656c0410744e0d9d1748a161/component.png",
+        "name":"Component",
+        "uri":"com.webos.app.externalinput.component"
+    },
+    "hdmi1":{
+        "icon":"http://192.168.1.162:3000/resources/4147141c6973edec34f6d6ea07e79a66590679a0/HDMI_1.png",
+        "name":"HDMI1",
+        "uri":"com.webos.app.hdmi1"
+    },
+    "hdmi2":{
+        "icon":"http://192.168.1.162:3000/resources/706317805be1a2805658b1e9ba99b34abea5d860/HDMI_2.png",
+        "name":"HDMI2",
+        "uri":"com.webos.app.hdmi2"
+    },
+    "hdmi3":{
+        "icon":"http://192.168.1.162:3000/resources/685a0cccf3e3a5d981013737d40114cd706acd29/HDMI_3.png",
+        "name":"HDMI3",
+        "uri":"com.webos.app.hdmi3"
+    }
+}
