@@ -7,15 +7,7 @@ from pyHS100 import SmartPlug
 
 plugs_blueprint = Blueprint('plugs', __name__)
 
-plugs = {
-    'fan': {
-        'ip': '192.168.1.188',
-    },
-    'lamp': {
-        'ip': '192.168.1.190',
-    },
-}
-
+plugs = json.load(open('conf/plugs.json'))
 
 @plugs_blueprint.route('/')
 def view():

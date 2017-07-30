@@ -1,0 +1,10 @@
+{
+    "fan": {
+        "location": "Living room",
+        "ip": "192.168.1.188"
+    },
+    "lamp": {
+        "location": "Living room",
+        "ip": "192.168.1.190"
+    }
+}
