@@ -52,11 +52,14 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
     $(document).ready(function() {
-        function setFanStatus() {
-            $.get('/fan/status', function(data, st) {
+        function setPlugStatus(el) {
+            var plug = $(el).attr('scbta');
+
+            console.log("Updating " + plug);
+            $.get('/plugs/status/' + plug, function(data, st) {
                 var status = JSON.parse(data).status;
                 console.log(status);
-                obj = $('#fan-living-room')
+                obj = $(el)
                 if (status) {
                     obj.removeClass();
                     obj.addClass('sc-but-selected');
@@ -69,41 +72,19 @@
             });
         }
 
-        setFanStatus();
-
-        $('#fan-living-room').click(function() {
-            $.get('/fan/toggle', function(data, st) {
-                console.log(data);
-                setFanStatus();
-            });
+        $('.plugbtn').each(function() {
+            var plug = $(this).attr('scbta');
+            console.log('Plug ' + plug);
+            setPlugStatus(this);
         });
 
-        function setlampStatus() {
-            $.get('/lamp/status', function(data, st) {
-                var status = JSON.parse(data).status;
-                console.log(status);
-                obj = $('#lamp-living-room')
-                if (status) {
-                    obj.removeClass();
-                    obj.addClass('sc-but-selected');
-                    obj.addClass('fa fa-check');
-                } else {
-                    obj.removeClass();
-                    obj.addClass('sc-but-unselected');
-                    obj.addClass('fa fa-times');
-                }
-            });
-        }
-
-        setlampStatus();
-
-        $('#lamp-living-room').click(function() {
-            $.get('/lamp/toggle', function(data, st) {
-                console.log(data);
-                setlampStatus();
+        $('.plugbtn').click(function() {
+            var plug = $(this).attr('scbta');
+            var outer = this;
+            $.get('/plugs/toggle/' + plug, function(data, st) {
+                setPlugStatus(outer);
             });
         });
-
     });
     </script>
 <head>
@@ -114,13 +95,13 @@
     <h2>F A N S</h2>
     <div id="fan-living-room-d">
         <p>Living room</p>
-        <button id="fan-living-room">
+        <button class="plugbtn" scbta="fan">
     </div>
 
     <h2>L A M P S</h2>
     <div id="lamp-living-room-d">
         <p>Sofa</p>
-        <button id="lamp-living-room">
+        <button class="plugbtn" scbta="lamp">
     </div>
 </div>
 
