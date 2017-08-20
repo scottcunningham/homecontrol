@@ -8,13 +8,13 @@ import subprocess
 import json
 from subprocess import PIPE
 
-CMD = "amixer -q -c 1 sset PCM 5%{}"
-SET_CMD = "amixer -q -c 1 sset PCM {}%"
+CMD = "amixer -q -c 1 sset Speaker 5%{}"
+SET_CMD = "amixer -q -c 1 sset Speaker {}%"
 UP_CMD = CMD.format('+')
 DOWN_CMD = CMD.format('-')
 GET_CMD = ["sh", "-c",
-           "amixer -c 1 get PCM | awk '/Front Left:/ { print $5 \"|\" $7 }'"]
-MUTE_CMD = 'amixer -c 1 sset PCM toggle'
+           "amixer -c 1 get Speaker | awk '/Front Left:/ { print $5 \"|\" $7 }'"]
+MUTE_CMD = 'amixer -c 1 sset Speaker toggle'
 REFRESH_PLAYLIST_CMD = 'sudo service mopidy restart'
 
 MOPIDY_HOST = 'http://localhost/mopidy/rpc'
