@@ -92,17 +92,13 @@
 <body>
 
 <div id="all-controls">
-    <h2>F A N S</h2>
-    <div id="fan-living-room-d">
-        <p>Living room</p>
-        <button class="plugbtn" scbta="fan">
+    {% for plug in plugs %}
+    <h2>{{ plug | upper | join(" ") }}</h2>
+    <div id="plug-{{ plug }}">
+        <button class="plugbtn" scbta="{{ plug }}">
     </div>
 
-    <h2>L A M P S</h2>
-    <div id="lamp-living-room-d">
-        <p>Sofa</p>
-        <button class="plugbtn" scbta="lamp">
-    </div>
+    {% endfor %}
 </div>
 
 </body>

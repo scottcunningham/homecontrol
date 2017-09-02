@@ -11,7 +11,7 @@ plugs = json.load(open('conf/plugs.json'))
 
 @plugs_blueprint.route('/')
 def view():
-    return render_template('plugs.html')
+    return render_template('plugs.html', plugs=plugs)
 
 
 @plugs_blueprint.route('/toggle/<plug>')
