@@ -9,9 +9,9 @@
 # Description:       Enable service provided by daemon.
 ### END INIT INFO
 
-dir="/home/pi/vol"
-cmd="/usr/bin/python3 /home/pi/vol/app.py"
-user="pi"
+dir="/home/scott/vol"
+cmd="/usr/bin/python3 /home/scott/vol/app.py"
+user="scott"
 
 name=`basename $0`
 pid_file="$dir/logs/$name.pid"
