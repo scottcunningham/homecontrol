@@ -1,11 +1,10 @@
 <html>
 <head>
     <title>pibox::asdf</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+
     <script>
     $(document).ready(function() {
         function setPlugStatus(el) {
@@ -47,14 +46,88 @@
         });
     });
     </script>
-<head>
 
+
+</head>
+<style>
+    body {
+        width: 24em;
+        font-family: Inconsolata, Monospace;
+        background-color: #333333;
+        color: #cccccc;
+    }
+
+    #frame {
+        position:absolute; left: 0; right: 0; bottom: 0; top: 10%;
+    }
+
+    .scbt {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #vol-current {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    select {
+        background-color: #4CAF50;
+        border: none;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 100px;
+        padding-right: 60px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        appearance: none;
+        border: 1px solid #111;
+        width: 80px;
+        padding: 5px 35px 5px 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        height: 34px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: url({{ url_for('static', filename='spotify.png')}}) 100% / 30% no-repeat #eee;
+    }
+
+    #controls {
+        position: absolute;
+        height: 10%;
+        width: 100%;
+    }
+</style>
 <body>
 
 <div id="container">
     <div class="row">
     {% for plug in plugs %}
-        <div class="col-6 plugbtn" scbta="{{ plug }}"></div>
+    <div class="plugbtn scbt" scbta="{{ plug }}">{{ plug }}</div>
     {% endfor %}
     </div>
 </div>
