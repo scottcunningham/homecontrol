@@ -1,0 +1,46 @@
+---
+
+- hosts: all
+  vars:
+    install_dir: "/home/scott/vol"
+  tasks:
+    - name: foo
+      file:
+        state: directory
+        path: "{{ item }}"
+      with_items:
+        - /home/scott/vol
+        - /home/scott/vol/logs
+    
+    - name: tarball
+      local_action: shell tar -zcf deploy.tgz ../*.py ../conf ../etc ../static ../templates
+
+    - name: copy code
+      unarchive:
+        src: ./deploy.tgz
+        dest: /home/scott/vol
+      register: copy_code
+
+    - name: setup service
+      command: cp "{{install_dir}}/etc/init.d/volcontrol" /etc/init.d/volcontrol
+      sudo: true
+      register: setup_service
+
+    - name: restart service
+      service:
+          name: volcontrol
+          state: restarted
+      when: copy_code.changed or setup_service.changed
+      sudo: true
+
+    - name: setup nginx conf service
+      command: cp "{{install_dir}}/etc/nginx/sites-enabled/default" /etc/nginx/sites-enabled
+      sudo: true
+      register: nginx_vhost
+
+    - name: nginx reload
+      service:
+          name: nginx 
+          state: reloaded
+      when: nginx_vhost.changed
+      sudo: true
