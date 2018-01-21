@@ -6,6 +6,7 @@ from vol import vol_blueprint
 from gui import gui_blueprint
 from plugs import plugs_blueprint
 from tv import tv_blueprint
+from new import new_blueprint
 
 
 app = Flask(__name__)
@@ -21,4 +22,5 @@ if __name__ == '__main__':
     app.register_blueprint(plugs_blueprint, url_prefix='/plugs')
     app.register_blueprint(gui_blueprint, url_prefix='/homecontrol')
     app.register_blueprint(tv_blueprint, url_prefix='/tv')
+    app.register_blueprint(new_blueprint, url_prefix='/new')
     app.run(port=1337, debug=True)

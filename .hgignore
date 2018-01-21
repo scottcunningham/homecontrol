@@ -1,4 +1,5 @@
 venv
 .pyc
 .idea
-*.tgz
+.tgz
+__pycache__

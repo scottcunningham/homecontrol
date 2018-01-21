@@ -1,47 +1,53 @@
-<!DOCTYPE html>
-<html>
+
+<html lang="en">
 <head>
-<title>pibox</title>
-<style>
-    body {
-        width: 24em;
-        margin: 0 auto;
-        font-family: Inconsolata, Monospace;
-	background-color: #333333;
-	color: #cccccc;
-    }
-
-    a {
-        color: #6688aa;
-    }
-
-    h1 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 12em;
-    }
-
-    .piimg {
-	width: 12%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-    }
-
-</style>
+	<meta charset="UTF-8">
+	<title>orangepizero.local</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+	<link href='{{ url_for('static', filename='common.css') }}' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-<h1>welcome to <a href="">pi3.local</a></h1>
+	<div class="container"
+		<div class='row'>
+			<div class='col twelve'>
+				<h1>welcome to <a href="">orangepizero.local</a></h1>
+			</div>
+		</div>
+	</div>
 
-<img class="piimg" src="{{ url_for('static', filename='pi.svg' ) }}"></img>
+	<div class="container"
+		<div class='row'>
+			<div class='col twelve'>
+				<img class='logo' src="{{ url_for('static', filename='logo.svg') }}" width=20%></img>
+			</div>
+		</div>
+	</div>
 
-<h2>links:</h2>
-<ul>
-	<li><a href="/vol">music</a></li>
-	<li><a href="/plugs">plugs</a></li>
-	<li><a href="/tv">tv</a></li>
-</ul>
+	<div class="container"
+		<div class="row">
+			<div class="col six">
+				<a href="/vol" class="btn btn-sea"><i class="fa fa-music"></i>music</a>
+			</div>
+
+			<div class="col six">
+				<a href="/plugs" class="btn btn-sea"><i class="fa fa-plug"></i>plugs</a>
+			</div>
+    </div>
+	</div>
+
+	<div class="container"
+    <div class="row">
+			<div class="col six">
+				<a href="/tv" class="btn btn-sea"><i class="fa fa-television"></i>tv</a>
+			</div>
+
+			<div class="col six">
+				<a href="/new" class="btn btn-sea"><i class="fa fa-times-circle"></i>new</a>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
