@@ -17,10 +17,14 @@ def root():
     return render_template('ugh.html')
 
 
-if __name__ == '__main__':
+def main():
     app.register_blueprint(vol_blueprint, url_prefix='/vol')
     app.register_blueprint(plugs_blueprint, url_prefix='/plugs')
     app.register_blueprint(gui_blueprint, url_prefix='/homecontrol')
     app.register_blueprint(tv_blueprint, url_prefix='/tv')
     app.register_blueprint(new_blueprint, url_prefix='/new')
     app.run(port=1337, debug=True)
+
+
+if __name__ == '__main__':
+    main()

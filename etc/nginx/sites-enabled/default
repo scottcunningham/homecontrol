@@ -42,5 +42,6 @@ server {
 
     location / {
             proxy_pass http://127.0.0.1:1337;
+            add_header Access-Control-Allow-Origin "*";
     }
 }

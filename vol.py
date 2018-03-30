@@ -28,35 +28,33 @@ vol_blueprint = Blueprint('vol', __name__)
 @vol_blueprint.route('/up')
 def up():
     run_cmd(UP_CMD)
-    return 'up!'
+    return get()
 
 
 @vol_blueprint.route('/down')
 def down():
     run_cmd(DOWN_CMD)
-    return 'down!'
+    return get()
 
 
 @vol_blueprint.route('/set')
 def set():
     percent = request.args.get('percent')
     run_cmd(SET_CMD.format(percent))
-    return 'set to {}!'.format(percent)
+    return get()
 
 
 @vol_blueprint.route('/get')
 def get():
-    vol, muted = get_vol()
-    print('vol is', vol, ' muted:', muted)
-    if muted:
-        return "{}% [muted]".format(vol)
-    return "{}%".format(vol)
+    res = get_vol()
+    print('vol is', res['percent'], ' muted:', res['muted'])
+    return json.dumps(res)
 
 
 @vol_blueprint.route('/mute')
 def mute():
     run_cmd(MUTE_CMD)
-    return 'mute!'
+    return get()
 
 
 @vol_blueprint.route('/')
@@ -74,11 +72,6 @@ def restart_mopidy():
     run_cmd(REFRESH_PLAYLIST_CMD)
 
 
-@vol_blueprint.route('/fantoggle')
-def fantoggle():
-    return 'use /fan/toggle now'
-
-
 @vol_blueprint.route('/playpause')
 def playpause():
     status = run_mopidy_cmd('core.playback.get_state')['result']
@@ -93,25 +86,27 @@ def playpause():
 @vol_blueprint.route('/track/next')
 def next_track():
     run_mopidy_cmd('core.playback.next')
-    return 'next'
+    return json.dumps({'status': 'ok'})
 
 
 @vol_blueprint.route('/track/prev')
 def prev_track():
     run_mopidy_cmd('core.playback.previous')
-    return 'prev'
+    return json.dumps({'status': 'ok'})
 
 
 @vol_blueprint.route('/setuser/<user>')
 def switch_user(user):
     set_spotify_user(user)
     restart_mopidy()
-    return "switched to user {}".format(user)
+    return json.dumps({'status': 'ok'})
 
 
 @vol_blueprint.route('/getuser/')
 def get_user():
-    return current_spotify_user()
+    return json.dumps({
+        'user': current_spotify_user()
+    })
 
 
 def run_mopidy_cmd(method):
@@ -129,10 +124,15 @@ def run_cmd(cmd, shell=False):
 
 def get_vol():
     stdout = subprocess.Popen(GET_CMD, stdout=PIPE).communicate()[0]
-    vol, muted = stdout.decode('utf-8').replace('[', '').replace(']', '').replace('%', '').split('|')
+    vol, muted = stdout.decode('utf-8') \
+        .replace('[', '').replace(']', '').replace('%', '') \
+        .split('|')
     muted = "off" in muted
     print(stdout, "==>", vol, muted)
-    return vol, muted
+    return {
+        'percent': vol,
+        'muted': muted,
+    }
 
 
 def current_spotify_user():
@@ -147,8 +147,10 @@ def get_user_spotify_config(user):
             config = configparser.ConfigParser()
             config.readfp(cf)
         section = 'spotify_{}'.format(user)
-        return {x: config.get(section, x) for x in
-            ['username', 'password', 'client_id', 'client_secret']}
+        return {
+            x: config.get(section, x) for x in
+            ['username', 'password', 'client_id', 'client_secret']
+        }
 
 
 def set_spotify_user(new_user):
